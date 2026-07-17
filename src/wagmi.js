@@ -19,7 +19,7 @@ export const arcTestnet = defineChain({
   testnet: true,
 })
 
-const WALLETCONNECT_PROJECT_ID = 'YOUR_WALLETCONNECT_PROJECT_ID'
+const WALLETCONNECT_PROJECT_ID = 'eaca0b29093d80455e1ea001b54bc4b0'
 
 export const config = createConfig({
   chains: [arcTestnet],
