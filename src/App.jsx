@@ -2,7 +2,7 @@ import { useAccount, useConnect, useDisconnect, useBalance, useSwitchChain } fro
 import { arcTestnet } from './wagmi'
 
 function truncateAddress(address) {
-  return `${address.slice(0, 6)}...${address.slice(-4)}`
+  return address.slice(0, 6) + '...' + address.slice(-4)
 }
 
 function WalletCard() {
@@ -24,7 +24,7 @@ function WalletCard() {
       <div className="card">
         <p className="eyebrow">Step 1</p>
         <h2>Connect a wallet</h2>
-        <p className="muted">Real connection — no mock addresses.</p>
+        <p className="muted">Real connection - no mock addresses.</p>
         <div className="connector-list">
           {connectors.map((connector) => (
             <button
@@ -41,6 +41,8 @@ function WalletCard() {
     )
   }
 
+  const explorerUrl = 'https://testnet.arcscan.app/address/' + address
+
   return (
     <div className="card">
       <p className="eyebrow">Wallet</p>
@@ -54,7 +56,7 @@ function WalletCard() {
             disabled={isSwitching}
             onClick={() => switchChain({ chainId: arcTestnet.id })}
           >
-            {isSwitching ? 'Switching…' : 'Switch to Arc Testnet'}
+            {isSwitching ? 'Switching...' : 'Switch to Arc Testnet'}
           </button>
         </div>
       )}
@@ -63,18 +65,18 @@ function WalletCard() {
         <div className="balance-row">
           <span className="muted">Balance</span>
           <span className="balance-value">
-            {balanceLoading ? '—' : `${Number(balance?.formatted).toFixed(4)} ${balance?.symbol}`}
+            {balanceLoading ? '-' : Number(balance?.formatted).toFixed(4) + ' ' + balance?.symbol}
           </span>
         </div>
       )}
 
       
         className="explorer-link"
-        href={`https://testnet.arcscan.app/address/${address}`}
+        href={explorerUrl}
         target="_blank"
         rel="noreferrer"
       >
-        View on ArcScan ↗
+        View on ArcScan
       </a>
 
       <button className="btn-secondary" onClick={() => disconnect()}>
@@ -96,4 +98,4 @@ export default function App() {
       </main>
     </div>
   )
-          }
+}
