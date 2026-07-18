@@ -24,7 +24,7 @@ function WalletCard() {
       <div className="card">
         <p className="eyebrow">Step 1</p>
         <h2>Connect a wallet</h2>
-        <p className="muted">Real connection - no mock addresses.</p>
+        <p className="muted">Real connection, no mock addresses.</p>
         <div className="connector-list">
           {connectors.map((connector) => (
             <button
@@ -41,7 +41,9 @@ function WalletCard() {
     )
   }
 
-  const explorerUrl = 'https://testnet.arcscan.app/address/' + address
+  const openExplorer = () => {
+    window.open('https://testnet.arcscan.app/address/' + address, '_blank')
+  }
 
   return (
     <div className="card">
@@ -50,13 +52,13 @@ function WalletCard() {
 
       {!onArc && (
         <div className="warning">
-          <p>Wrong network. This wallet isn't on Arc Testnet.</p>
+          <p>Wrong network. This wallet is not on Arc Testnet.</p>
           <button
             className="btn-primary"
             disabled={isSwitching}
             onClick={() => switchChain({ chainId: arcTestnet.id })}
           >
-            {isSwitching ? 'Switching...' : 'Switch to Arc Testnet'}
+            {isSwitching ? 'Switching' : 'Switch to Arc Testnet'}
           </button>
         </div>
       )}
@@ -70,14 +72,9 @@ function WalletCard() {
         </div>
       )}
 
-      
-        className="explorer-link"
-        href={explorerUrl}
-        target="_blank"
-        rel="noreferrer"
-      >
+      <button className="btn-secondary" onClick={openExplorer}>
         View on ArcScan
-      </a>
+      </button>
 
       <button className="btn-secondary" onClick={() => disconnect()}>
         Disconnect
